@@ -21,10 +21,8 @@ export class Task implements ITask {
   @Column()
   completed!: boolean;
 
-  @Column()
-  @ManyToOne(() => User, (user) => user.tasks, {
-    cascade: true
-  })
+  @Column({ type: 'varchar', nullable: true })
+  @ManyToOne(() => User, (user) => user.tasks)
   @JoinColumn()
   user!: User;
 
