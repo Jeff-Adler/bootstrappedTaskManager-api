@@ -28,7 +28,9 @@ export class User implements IUser {
   @MinLength(8)
   password!: string;
 
-  @OneToMany(() => Task, (task) => task.user)
+  @OneToMany(() => Task, (task) => task.user, {
+    cascade: true
+  })
   tasks!: Task[];
 
   @Column()

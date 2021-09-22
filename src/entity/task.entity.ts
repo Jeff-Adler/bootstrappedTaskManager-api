@@ -1,5 +1,13 @@
 import { ITask } from '@interfaces/task.interface';
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { User } from './user.entity';
 
 @Entity()
@@ -14,7 +22,10 @@ export class Task implements ITask {
   completed!: boolean;
 
   @Column()
-  @ManyToOne(() => User, (user) => user.tasks)
+  @ManyToOne(() => User, (user) => user.tasks, {
+    cascade: true
+  })
+  @JoinColumn()
   user!: User;
 
   @Column()
