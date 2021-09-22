@@ -1,0 +1,10 @@
+{
+  "env": "development",
+  "ip_address": "127.0.0.1",
+  "port": "8080",
+  "db": {
+    "host": "127.0.0.1",
+    "username": "jeffadler",
+    "name": "bootstrapped_task_manager"
+  }
+}

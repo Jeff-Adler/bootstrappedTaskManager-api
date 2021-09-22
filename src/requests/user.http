@@ -1,0 +1,25 @@
+### Retrieve all users
+
+GET http://localhost:8080/users?order=id:DESC&order=email:ASC&skip=1
+
+
+### Retrieve user by Id
+
+GET http://localhost:8080/users/145
+
+### Retrieve user by email
+
+GET http://localhost:8080/users/search?email=jeff@test.com
+
+### Patch user
+
+PATCH http://localhost:8080/users/133
+Content-Type: application/json
+
+{
+  "email" : "JEFFFFFVSvaervFV9@test.com"
+}
+
+### Delete user
+
+DELETE http://localhost:8080/users/117
