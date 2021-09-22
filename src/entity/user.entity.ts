@@ -6,11 +6,13 @@ import {
   CreateDateColumn,
   Unique,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
+  OneToMany
 } from 'typeorm';
 import { IUser } from '@interfaces/user.interface';
 import { IsEmail, MinLength } from 'class-validator';
 import { normalizeEmailAddress } from '@utils/normalizeEmailAddress';
+import { Task } from './task.entity';
 
 @Entity()
 @Unique(['email'])
@@ -25,6 +27,9 @@ export class User implements IUser {
   @Column()
   @MinLength(8)
   password!: string;
+
+  @OneToMany(() => Task, (task) => task.user)
+  tasks!: Task[];
 
   @Column()
   @CreateDateColumn()
