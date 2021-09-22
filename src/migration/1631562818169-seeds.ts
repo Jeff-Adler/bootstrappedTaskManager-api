@@ -12,7 +12,7 @@ export class seeds1631562818169 implements MigrationInterface {
     // Wipe database
     for (const entity of entities) {
       const repository = dbConnection.getRepository(entity.name);
-      await repository.clear();
+      await repository.delete({});
     }
 
     // Seed test user
@@ -32,7 +32,7 @@ export class seeds1631562818169 implements MigrationInterface {
         completed: false,
         user: await getRandomUser()
       };
-      await dbConnection.getRepository('tasks').save(task);
+      await dbConnection.getRepository('task').save(task);
     }
 
     async function getRandomUser(): Promise<User> {
@@ -40,7 +40,7 @@ export class seeds1631562818169 implements MigrationInterface {
         .getRepository('user')
         .createQueryBuilder()
         .select('user.id')
-        .from(User, 'users')
+        .from(User, 'user')
         .orderBy('RANDOM()')
         .limit(1)
         .getOne();
@@ -51,13 +51,19 @@ export class seeds1631562818169 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     const dbConnection = getConnection();
+
+    // const userRepository = dbConnection.getRepository(User);
+    // await userRepository.delete({});
+
+    // const taskRepository = dbConnection.getRepository(Task);
+    // await taskRepository.delete({});
     // Get all entities
     const entities = dbConnection.entityMetadatas;
 
     // Wipe database
     for (const entity of entities) {
       const repository = dbConnection.getRepository(entity.name);
-      await repository.clear();
+      await repository.delete({});
     }
   }
 }
