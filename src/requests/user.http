@@ -17,7 +17,7 @@ PATCH http://localhost:8080/users/133
 Content-Type: application/json
 
 {
-  "email" : "JEFFFFFVSvaervFV9@test.com"
+  "email" : "Updated_Email@test.com"
 }
 
 ### Delete user

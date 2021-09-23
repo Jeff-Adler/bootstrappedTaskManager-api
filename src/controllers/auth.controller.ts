@@ -10,14 +10,10 @@ export class AuthController {
   public authService: AuthService = new AuthService();
 
   public register = async (req: Request, res: Response, next: NextFunction) => {
-    const createUserData: CreateUserDto = req.body;
-
     try {
+      const createUserData: CreateUserDto = req.body;
       const user: User = await this.authService.register(createUserData);
 
-      const tokenData = this.authService.createToken(user);
-
-      res.setHeader('Set-Cookie', [this.authService.createCookie(tokenData)]);
       return res.status(200).send(user);
     } catch (error) {
       next(error);
@@ -25,11 +21,11 @@ export class AuthController {
   };
 
   public login = async (req: Request, res: Response, next: NextFunction) => {
-    const loginUserData: LoginUserDto = req.body;
-
     try {
-      const user: User = await this.authService.login(loginUserData);
+      const loginUserData: LoginUserDto = req.body;
+      const { cookie, user } = await this.authService.login(loginUserData);
 
+      res.setHeader('Set-Cookie', [cookie]);
       return res.status(200).send(user);
     } catch (error) {
       next(error);

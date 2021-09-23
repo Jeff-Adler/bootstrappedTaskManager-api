@@ -9,3 +9,13 @@ Express
 TypeScript
 TypeORM
 PostgreSQL
+
+# Routes:
+
+- Login
+- Logout
+- Create task
+- Complete task
+- Get all of my (completed/uncompleted) tasks
+- Edit task
+- Delete task

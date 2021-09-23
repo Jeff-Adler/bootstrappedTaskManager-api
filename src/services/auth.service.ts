@@ -33,7 +33,7 @@ export class AuthService {
     return user;
   }
 
-  public async login(userData: CreateUserDto): Promise<User> {
+  public async login(userData: CreateUserDto): Promise<{ cookie: string; user: User }> {
     const userRepository = getRepository(this.userEntity);
     const { email, password } = userData;
 
@@ -49,7 +49,10 @@ export class AuthService {
       throw new HttpException(404, 'Invalid password');
     }
 
-    return user;
+    const tokenData = this.createToken(user);
+    const cookie = this.createCookie(tokenData);
+
+    return { cookie, user };
   }
 
   public async logout(userData: IUser): Promise<User> {
