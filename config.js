@@ -26,7 +26,7 @@ const config = convict({
     doc: 'Secret Key for JWT ',
     format: String,
     default: '',
-    env: 'PORT',
+    env: 'SECRET_KEY',
     sensitive: true
   },
   db: {

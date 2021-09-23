@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register -r dotenv/config src/server.ts dotenv_config_path=src/config/.env.development",
+    "start": "ENVIRONMENT=development ts-node-dev --respawn --transpile-only -r tsconfig-paths/register -r dotenv/config src/server.ts dotenv_config_path=src/config/.env.development",
     "seed:create": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create -c default -n seeds",
     "seed:run": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -c default",
     "seed:revert": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -c default",
