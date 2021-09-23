@@ -42,7 +42,7 @@ export class TaskService {
 
     task.description = description;
 
-    const user: User | undefined = await userRepository.findOne(id);
+    const user: User | undefined = await userRepository.findOne({ where: { id: id }, select: ['id'] });
 
     if (!user) {
       throw new HttpException(404, `Could not retrieve data`);
