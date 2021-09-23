@@ -8,8 +8,8 @@ export class TaskService {
   private readonly userEntity: EntityTarget<User> = User;
 
   public getTasks = async (id: number) => {
-    const taskRepository: Repository<Task> = getRepository(this.taskEntity);
     const userRepository: Repository<User> = getRepository(this.userEntity);
+    const taskRepository: Repository<Task> = getRepository(this.taskEntity);
 
     const user: User | undefined = await userRepository.findOne(id);
 
@@ -32,5 +32,32 @@ export class TaskService {
     }
 
     return task;
+  };
+
+  public createTask = async (id: number, description: string) => {
+    const userRepository: Repository<User> = getRepository(this.userEntity);
+    const taskRepository: Repository<Task> = getRepository(this.taskEntity);
+
+    const task: Task = new Task();
+
+    task.description = description;
+
+    const user: User | undefined = await userRepository.findOne(id);
+
+    if (!user) {
+      throw new HttpException(404, `Could not retrieve data`);
+    }
+
+    task.user = user;
+
+    await taskRepository.save(task);
+
+    const savedTask = taskRepository.findOne(task.id);
+
+    if (!savedTask) {
+      throw new HttpException(404, `Could not create new task`);
+    }
+
+    return savedTask;
   };
 }

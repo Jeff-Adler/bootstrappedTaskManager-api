@@ -29,10 +29,21 @@ export class TaskController {
     }
   };
 
-  public createTask(req: RequestWithUser, res: Response, next: NextFunction) {}
+  public createTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.user!;
+      const { description } = req.body;
+
+      const task = await this.taskService.createTask(id, description);
+
+      return res.status(200).send(task);
+    } catch (error) {
+      next();
+    }
+  };
 
   // update Complete or Description
-  public updateTask(req: RequestWithUser, res: Response, next: NextFunction) {}
+  public updateTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {};
 
-  public deleteTask(req: RequestWithUser, res: Response, next: NextFunction) {}
+  public deleteTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {};
 }

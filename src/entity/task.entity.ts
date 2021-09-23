@@ -18,7 +18,7 @@ export class Task implements ITask {
   @Column()
   description!: string;
 
-  @Column()
+  @Column('boolean', { default: false })
   completed!: boolean;
 
   @Column({ type: 'varchar', nullable: true })

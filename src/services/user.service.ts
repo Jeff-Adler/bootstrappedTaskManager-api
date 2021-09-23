@@ -44,10 +44,14 @@ export class UserService {
 
     await userRepository.save(user);
 
-    // Necessary extra step to hide password
-    const foundUser = await userRepository.findOne(user.id);
+    // Necessary extra step to trigger lifecycle methods
+    const savedUser = await userRepository.findOne(user.id);
 
-    return foundUser;
+    if (!savedUser) {
+      throw new HttpException(404, `Could not create new user`);
+    }
+
+    return savedUser;
   };
 
   updateUser = async (id: number, attrs: Partial<User>) => {
