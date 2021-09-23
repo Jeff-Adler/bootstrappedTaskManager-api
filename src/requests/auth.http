@@ -18,6 +18,10 @@ Content-Type: application/json
   "password" : "12345678"
 }
 
+### Retrieve logged-in user's tasks
+
+GET http://localhost:8080/tasks
+
 ### Logout user
 
 POST http://localhost:8080/auth/logout
