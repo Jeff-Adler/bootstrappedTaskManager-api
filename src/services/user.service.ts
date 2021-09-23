@@ -15,6 +15,7 @@ export class UserService {
 
   public findUserById = async (id: number): Promise<User> => {
     const userRepository = getRepository(this.userEntity);
+
     const user: User | undefined = await userRepository.findOne(id);
 
     if (!user) {
@@ -26,6 +27,7 @@ export class UserService {
 
   findUserByEmail = async (email: string): Promise<User[]> => {
     const userRepository = getRepository(this.userEntity);
+
     const users: User[] = await userRepository.find({ email });
 
     if (!users.length) {
@@ -37,6 +39,7 @@ export class UserService {
 
   createUser = async (email: string, password: string) => {
     const userRepository = getRepository(this.userEntity);
+
     let user = userRepository.create({ email, password });
 
     await userRepository.save(user);

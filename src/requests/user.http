@@ -5,7 +5,7 @@ GET http://localhost:8080/users?order=id:DESC&order=email:ASC&skip=1
 
 ### Retrieve user by Id
 
-GET http://localhost:8080/users/145
+GET http://localhost:8080/users/232
 
 ### Retrieve user by email
 

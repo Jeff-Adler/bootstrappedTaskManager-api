@@ -26,8 +26,9 @@ export class UserController {
   };
 
   public getUserById = async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
     try {
+      const { id } = req.params;
+
       const user: User = await this.userService.findUserById(parseInt(id));
 
       return res.status(200).send(user);
@@ -37,8 +38,9 @@ export class UserController {
   };
 
   public getUserByEmail = async (req: Request, res: Response, next: NextFunction) => {
-    const { email } = req.query;
     try {
+      const { email } = req.query;
+
       const [user] = await this.userService.findUserByEmail(`${email}`);
 
       return res.status(200).send(user);
@@ -48,8 +50,9 @@ export class UserController {
   };
 
   public createUser = async (req: Request, res: Response, next: NextFunction) => {
-    const { email, password } = req.body;
     try {
+      const { email, password } = req.body;
+
       const user = await this.userService.createUser(email, password);
 
       return res.status(200).send(user);
@@ -59,8 +62,9 @@ export class UserController {
   };
 
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
     try {
+      const { id } = req.params;
+
       const user = await this.userService.updateUser(parseInt(id), req.body);
 
       return res.status(200).send(user);
@@ -70,8 +74,9 @@ export class UserController {
   };
 
   public deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
     try {
+      const { id } = req.params;
+
       const user: User = await this.userService.deleteUser(parseInt(id));
 
       return res.status(200).send(user);

@@ -13,7 +13,7 @@ export const dbConnectionObj: ConnectionOptions = {
   password: password,
   database: name,
   synchronize: true,
-  logging: false,
+  logging: true,
   entities: [path.join(__dirname, '../**/*.entity{.ts,.js}')],
   migrations: [path.join(__dirname, '../**/*.migration{.ts,.js}')],
   migrationsRun: true,

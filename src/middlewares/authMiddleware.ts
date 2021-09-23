@@ -2,13 +2,14 @@ const config = require('@/config.js');
 import jwt from 'jsonwebtoken';
 import { HttpException } from '@exceptions/HttpException';
 import { RequestWithUser } from '@interfaces/requestWithUser.interface';
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { getRepository } from 'typeorm';
 import { User } from '@entity/user.entity';
 import { DataStoredInToken } from '@interfaces/dataStoredInToken.interface';
 
 export const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
+    console.log(req.cookies);
     const Authorization = req.cookies['Authorization'] || req.header('Authorization')?.split('Bearer ')[1] || null;
 
     if (Authorization) {
