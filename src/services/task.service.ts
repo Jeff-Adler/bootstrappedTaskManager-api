@@ -60,4 +60,25 @@ export class TaskService {
 
     return savedTask;
   };
+
+  public updateTask = async (id: number, attrs: Partial<Task>) => {
+    if (!Object.keys(attrs).length) {
+      throw new HttpException(400, "You're not userData");
+    }
+
+    const taskRepository: Repository<Task> = getRepository(this.taskEntity);
+
+    const task: Task | undefined = await taskRepository.findOne(id);
+
+    if (!task) {
+      throw new HttpException(404, `Could not retrieve task`);
+    }
+
+    // We use this in lieu of .update, because .update doesn't trigger TypeORM entity lifecycle hooks.
+    Object.assign(task, attrs);
+
+    await taskRepository.save(task);
+
+    return task;
+  };
 }

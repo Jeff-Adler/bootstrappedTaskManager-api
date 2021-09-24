@@ -43,7 +43,17 @@ export class TaskController {
   };
 
   // update Complete or Description
-  public updateTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {};
+  public updateTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      const id = Number(req.params.id);
+
+      const task = await this.taskService.updateTask(id, req.body);
+
+      return res.status(200).send(task);
+    } catch (error) {
+      next();
+    }
+  };
 
   public deleteTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {};
 }

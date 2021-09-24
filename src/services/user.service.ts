@@ -55,6 +55,10 @@ export class UserService {
   };
 
   updateUser = async (id: number, attrs: Partial<User>) => {
+    if (!Object.keys(attrs).length) {
+      throw new HttpException(400, 'Nothing to update');
+    }
+
     const userRepository = getRepository(this.userEntity);
 
     const user: User | undefined = await userRepository.findOne(id);
@@ -66,13 +70,9 @@ export class UserService {
     // We use this in lieu of .update, because .update doesn't trigger TypeORM entity lifecycle hooks.
     Object.assign(user, attrs);
 
-    try {
-      await userRepository.save(user);
+    await userRepository.save(user);
 
-      return userRepository.findOne(user.id);
-    } catch (error) {
-      throw new HttpException(404, error);
-    }
+    return userRepository.findOne(user.id);
   };
 
   deleteUser = async (id: number) => {
@@ -84,12 +84,8 @@ export class UserService {
       throw new HttpException(404, `User of id ${id} not found`);
     }
 
-    try {
-      await userRepository.delete(id);
+    await userRepository.delete(id);
 
-      return user;
-    } catch (error) {
-      throw new HttpException(404, error);
-    }
+    return user;
   };
 }

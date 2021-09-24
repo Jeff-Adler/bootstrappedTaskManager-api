@@ -1,5 +1,6 @@
 import { TaskController } from '@controllers/task.controller';
 import { CreateTaskDto } from '@dtos/createTask.dto';
+import { UpdateTaskDto } from '@dtos/updateTask.dto';
 import { Routes } from '@interfaces/routes.interface';
 import { authMiddleware } from '@middlewares/authMiddleware';
 import { validationMiddleware } from '@middlewares/validationMiddleware';
@@ -25,7 +26,11 @@ export class TaskRoutes implements Routes {
       this.taskController.createTask
     );
 
-    this.router.patch(`${this.path}`, authMiddleware, this.taskController.updateTask);
+    this.router.patch(
+      `${this.path}:id`,
+      [validationMiddleware(UpdateTaskDto, 'body'), authMiddleware],
+      this.taskController.updateTask
+    );
 
     this.router.delete(`${this.path}`, authMiddleware, this.taskController.deleteTask);
   }
