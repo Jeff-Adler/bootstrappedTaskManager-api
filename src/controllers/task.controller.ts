@@ -55,5 +55,15 @@ export class TaskController {
     }
   };
 
-  public deleteTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {};
+  public deleteTask = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      const id = Number(req.params.id);
+
+      const task = await this.taskService.deleteTask(id);
+
+      return res.status(200).send(task);
+    } catch (error) {
+      next();
+    }
+  };
 }

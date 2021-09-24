@@ -32,6 +32,6 @@ export class TaskRoutes implements Routes {
       this.taskController.updateTask
     );
 
-    this.router.delete(`${this.path}`, authMiddleware, this.taskController.deleteTask);
+    this.router.delete(`${this.path}:id`, authMiddleware, this.taskController.deleteTask);
   }
 }

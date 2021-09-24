@@ -81,4 +81,18 @@ export class TaskService {
 
     return task;
   };
+
+  public deleteTask = async (id: number) => {
+    const taskRepository: Repository<Task> = getRepository(this.taskEntity);
+
+    const task: Task | undefined = await taskRepository.findOne(id);
+
+    if (!task) {
+      throw new HttpException(404, `Could not retrieve task`);
+    }
+
+    await taskRepository.delete(id);
+
+    return task;
+  };
 }
