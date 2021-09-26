@@ -80,6 +80,7 @@ export class AuthService {
   }
 
   public createCookie(tokenData: TokenData) {
+    // return `Authorization=${tokenData.token}; Domain=.app.localhost; HttpOnly; Secure; SameSite=None; Max-Age=${tokenData.expiresIn}`;
     return `Authorization=${tokenData.token}; HttpOnly; Secure; SameSite=None; Max-Age=${tokenData.expiresIn}`;
   }
 }

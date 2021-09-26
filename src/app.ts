@@ -44,7 +44,6 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(compression());
     this.app.use(
       cors({
         origin: config.get('cors.origin'),
@@ -52,12 +51,13 @@ class App {
         exposedHeaders: ['Set-Cookie', 'Date', 'ETag']
       })
     );
-    this.app.use(cookieParser());
+    this.app.use(compression());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(helmet());
     this.app.use(hpp({ whitelist: ['order'] }));
     this.app.use(morganMiddleware);
+    this.app.use(cookieParser());
   }
 
   private initializeRoutes() {
