@@ -9,8 +9,6 @@ import { DataStoredInToken } from '@interfaces/dataStoredInToken.interface';
 
 export const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
-    console.log(req.cookies);
-    console.log(req.signedCookies);
     const Authorization = req.cookies['Authorization'] || req.header('Authorization')?.split('Bearer ')[1] || null;
 
     if (Authorization) {
