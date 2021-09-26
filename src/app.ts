@@ -45,7 +45,7 @@ class App {
 
   private initializeMiddlewares() {
     this.app.use(compression());
-    this.app.use(cors());
+    this.app.use(cors({ origin: config.get('cors.origin'), credentials: config.get('cors.credentials') }));
     this.app.use(cookieParser());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));

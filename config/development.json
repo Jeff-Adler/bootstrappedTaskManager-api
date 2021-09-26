@@ -6,5 +6,9 @@
     "host": "127.0.0.1",
     "username": "jeffadler",
     "name": "bootstrapped_task_manager"
+  },
+  "cors": {
+    "origin": true,
+    "credentials": true
   }
 }

@@ -34,25 +34,25 @@ const config = convict({
       doc: 'TypeORM connection name',
       format: String,
       default: 'default',
-      env: 'CONNECTION_NAME'
+      env: 'db.connection_name'
     },
     host: {
       doc: 'Database host name/IP',
       format: '*',
       default: '127.0.0.1',
-      env: 'DB_HOST'
+      env: 'db.host'
     },
     port: {
       doc: 'Database port',
       format: 'port',
       default: 5432,
-      env: 'DB_PORT'
+      env: 'db.port'
     },
     username: {
       doc: 'Database username',
       format: String,
       default: '',
-      env: 'DB_USERNAME'
+      env: 'db.username'
     },
     password: {
       doc: 'Database password',
@@ -65,7 +65,21 @@ const config = convict({
       doc: 'Database name',
       format: String,
       default: 'users',
-      env: 'NAME'
+      env: 'db.name'
+    }
+  },
+  cors: {
+    origin: {
+      doc: 'sets Access-Control-Allow-Origin',
+      format: Boolean,
+      default: true,
+      env: 'cors.origin'
+    },
+    credentials: {
+      doc: 'sets Access-Control-Allow-Credentials',
+      format: Boolean,
+      default: true,
+      env: 'cors.credentials'
     }
   }
 });

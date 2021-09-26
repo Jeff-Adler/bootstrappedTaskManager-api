@@ -9,7 +9,6 @@ import { DataStoredInToken } from '@interfaces/dataStoredInToken.interface';
 
 export const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
-    console.log(req.cookies);
     const Authorization = req.cookies['Authorization'] || req.header('Authorization')?.split('Bearer ')[1] || null;
 
     if (Authorization) {
@@ -21,7 +20,6 @@ export const authMiddleware = async (req: RequestWithUser, res: Response, next: 
       const user = await userRepository.findOne(userId, { select: ['id', 'email', 'password'] });
 
       if (user) {
-        //makes req.user available across routes that pass auth middleware
         req.user = user;
         next();
       } else {
