@@ -26,6 +26,8 @@ export class AuthController {
       const { cookie, user } = await this.authService.login(loginUserData);
 
       res.setHeader('Set-Cookie', [cookie]);
+      res.setHeader('Access-Control-Expose-Headers', ['*']);
+      res.setHeader('Access-Control-Allow-Methods', ['POST', 'GET', 'OPTIONS']);
       return res.status(200).send(user);
     } catch (error) {
       next(error);
