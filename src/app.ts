@@ -47,8 +47,7 @@ class App {
     this.app.use(
       cors({
         origin: config.get('cors.origin'),
-        credentials: config.get('cors.credentials'),
-        exposedHeaders: ['Set-Cookie', 'Date', 'ETag']
+        credentials: config.get('cors.credentials')
       })
     );
     this.app.use(compression());
