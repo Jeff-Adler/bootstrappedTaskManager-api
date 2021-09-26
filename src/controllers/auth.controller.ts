@@ -26,9 +26,12 @@ export class AuthController {
       const { cookie, user } = await this.authService.login(loginUserData);
 
       res.setHeader('Set-Cookie', [cookie]);
-      res.setHeader('Access-Control-Expose-Headers', '*');
-      res.setHeader('Access-Control-Allow-Methods', ['POST', 'GET', 'OPTIONS']);
-      res.setHeader('Access-Control-Allow-Origins', 'localhost:3000');
+      // res.setHeader('Access-Control-Expose-Headers', 'Set-Cookie');
+      // res.setHeader('Access-Control-Allow-Headers', 'Set-Cookie');
+      // res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+      // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      // res.setHeader('Access-Control-Allow-Credentials', 'true');
+      // res.setHeader('Access-Control-Allow-Headers', 'Content-type, Accept, X-Custom-Header');
       return res.status(200).send(user);
     } catch (error) {
       next(error);

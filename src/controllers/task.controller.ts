@@ -11,6 +11,7 @@ export class TaskController {
 
       const tasks = await this.taskService.getTasks(id);
 
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
       return res.status(200).send(tasks);
     } catch (error) {
       next();
